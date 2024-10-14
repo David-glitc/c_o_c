@@ -1,0 +1,74 @@
+[package]
+name = "solochain-template-node"
+description = "A solochain node template built with Substrate, part of Polkadot Sdk. (polkadot v1.14.0)"
+version = "0.1.0"
+license = "Unlicense"
+authors.workspace = true
+homepage.workspace = true
+repository.workspace = true
+edition.workspace = true
+publish = false
+
+build = "build.rs"
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
+
+[dependencies]
+clap = { features = ["derive"], workspace = true }
+futures = { features = ["thread-pool"], workspace = true }
+serde_json = { workspace = true, default-features = true }
+jsonrpsee = { features = ["server"], workspace = true }
+sc-cli = { version = "0.44.0", workspace = true, default-features = true }
+sp-core = { version = "34.0.0", workspace = true, default-features = true }
+sc-executor = { version = "0.39.0", workspace = true, default-features = true }
+sc-network = { version = "0.42.0", workspace = true, default-features = true }
+sc-service = { version = "0.43.0", workspace = true, default-features = true }
+sc-telemetry = { version = "22.0.0", workspace = true, default-features = true }
+sc-transaction-pool = { version = "35.0.0", workspace = true, default-features = true }
+sc-transaction-pool-api = { version = "35.0.0", workspace = true, default-features = true }
+sc-offchain = { version = "37.0.0", workspace = true, default-features = true }
+sc-consensus-aura = { version = "0.42.0", workspace = true, default-features = true }
+sp-consensus-aura = { version = "0.39.0", workspace = true, default-features = true }
+sc-consensus = { version = "0.41.0", workspace = true, default-features = true }
+sc-consensus-grandpa = { version = "0.27.0", workspace = true, default-features = true }
+sp-consensus-grandpa = { version = "20.0.0", workspace = true, default-features = true }
+sc-client-api = { version = "35.1.0", workspace = true, default-features = true }
+sc-rpc-api = { version = "0.41.0", workspace = true, default-features = true }
+sc-basic-authorship = { version = "0.42.0", workspace = true, default-features = true }
+sp-runtime = { version = "38.0.0", workspace = true, default-features = true }
+sp-io = { version = "37.0.0", workspace = true, default-features = true }
+sp-timestamp = { version = "33.0.0", workspace = true, default-features = true }
+sp-inherents = { version = "33.0.0", workspace = true, default-features = true }
+sp-keyring = { version = "38.0.0", workspace = true, default-features = true }
+sp-api = { version = "33.0.0", workspace = true, default-features = true }
+sp-blockchain = { version = "35.1.0", workspace = true, default-features = true }
+sp-block-builder = { version = "33.0.0", workspace = true, default-features = true }
+frame-system = { version = "36.0.0", workspace = true, default-features = true }
+pallet-transaction-payment = { version = "36.0.0", workspace = true }
+pallet-transaction-payment-rpc = { version = "38.0.0", workspace = true, default-features = true }
+substrate-frame-rpc-system = { version = "36.0.0", workspace = true, default-features = true }
+frame-benchmarking-cli = { version = "40.0.0", workspace = true, default-features = true }
+solochain-template-runtime = { version = "0.1.0", workspace = true }
+
+[build-dependencies]
+substrate-build-script-utils = { version = "11.0.0", workspace = true, default-features = true }
+
+[features]
+default = []
+# Dependencies that are only required if runtime benchmarking should be build.
+runtime-benchmarks = [
+	"frame-benchmarking-cli/runtime-benchmarks",
+	"frame-system/runtime-benchmarks",
+	"sc-service/runtime-benchmarks",
+	"solochain-template-runtime/runtime-benchmarks",
+	"sp-runtime/runtime-benchmarks",
+]
+# Enable features that allow the runtime to be tried and debugged. Name might be subject to change
+# in the near future.
+try-runtime = [
+	"frame-system/try-runtime",
+	"pallet-transaction-payment/try-runtime",
+	"solochain-template-runtime/try-runtime",
+	"sp-runtime/try-runtime",
+]
